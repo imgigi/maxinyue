@@ -1,0 +1,1236 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>麻欣悦 | 个人作品集 Portfolio</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500;600;700&display=swap');
+        
+        * {
+            font-family: 'Inter', 'Noto Sans SC', sans-serif;
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        :root {
+            --primary-lavender: #e8e0f0;
+            --light-lavender: #f5f0fa;
+            --medium-lavender: #d4c8e8;
+            --dark: #1a1a2e;
+            --white: #ffffff;
+            --cream: #faf8f5;
+            --warm-gray: #f0ede8;
+            --border-color: #c8bdd8;
+        }
+        
+        html {
+            scroll-behavior: smooth;
+        }
+        
+        body {
+            background-color: #d8d0e0;
+            padding: 24px;
+        }
+        
+        .portfolio-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: var(--white);
+            border-radius: 16px;
+            box-shadow: 
+                0 0 0 1px rgba(0,0,0,0.05),
+                0 4px 6px rgba(0,0,0,0.05),
+                0 20px 40px rgba(0,0,0,0.1),
+                0 40px 80px rgba(0,0,0,0.08);
+            overflow: hidden;
+            position: relative;
+        }
+        
+        .portfolio-container::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            border: 3px solid var(--border-color);
+            border-radius: 16px;
+            pointer-events: none;
+            z-index: 100;
+        }
+        
+        .page {
+            min-height: calc(100vh - 48px);
+            width: 100%;
+            position: relative;
+        }
+        
+        .page-home {
+            height: calc(100vh - 48px);
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .folder-header {
+            background: var(--dark);
+            color: white;
+            padding: 10px 32px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 11px;
+            position: relative;
+        }
+        
+        .folder-header::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, var(--medium-lavender), transparent);
+        }
+        
+        .folder-header span {
+            opacity: 0.7;
+        }
+        
+        .folder-header .value {
+            border-bottom: 1px solid rgba(255,255,255,0.3);
+            padding: 0 10px;
+            margin-left: 6px;
+        }
+        
+        .card-white {
+            background: var(--white);
+            border-radius: 16px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.04);
+            border: 1px solid rgba(0,0,0,0.06);
+            position: relative;
+        }
+        
+        .card-dark {
+            background: var(--dark);
+            border-radius: 12px;
+            color: white;
+        }
+        
+        .highlight-text {
+            color: #6b5b95;
+            font-weight: 600;
+        }
+        
+        .stat-number {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--dark);
+        }
+        
+        .download-btn {
+            background: var(--dark);
+            color: white;
+            border-radius: 50px;
+            padding: 12px 24px;
+            font-weight: 600;
+            font-size: 13px;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            border: 2px solid var(--dark);
+        }
+        
+        .download-btn:hover {
+            background: transparent;
+            color: var(--dark);
+            transform: translateY(-2px);
+        }
+        
+        .section-title {
+            font-size: 1.75rem;
+            font-weight: 700;
+            color: var(--dark);
+            margin-bottom: 4px;
+        }
+        
+        .section-subtitle {
+            font-size: 0.85rem;
+            color: #888;
+            margin-bottom: 28px;
+        }
+        
+        .number-badge {
+            width: 36px;
+            height: 36px;
+            background: var(--primary-lavender);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 1rem;
+            color: var(--dark);
+            border: 2px solid var(--medium-lavender);
+        }
+        
+        .info-label {
+            font-size: 10px;
+            color: #888;
+            margin-bottom: 2px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        .info-value {
+            font-weight: 600;
+            color: var(--dark);
+            font-size: 12px;
+        }
+        
+        .gallery-row {
+            display: flex;
+            gap: 12px;
+            align-items: flex-start;
+        }
+        
+        .gallery-row img {
+            flex: 1;
+            min-width: 0;
+            height: auto;
+            object-fit: contain;
+            border-radius: 8px;
+            border: 1px solid rgba(0,0,0,0.08);
+        }
+        
+        .masonry-grid {
+            column-count: 3;
+            column-gap: 12px;
+        }
+        
+        .masonry-grid .masonry-item {
+            break-inside: avoid;
+            margin-bottom: 12px;
+        }
+        
+        .masonry-grid .masonry-item img {
+            width: 100%;
+            height: auto;
+            border-radius: 8px;
+            display: block;
+            border: 1px solid rgba(0,0,0,0.08);
+        }
+        
+        @media (max-width: 768px) {
+            .masonry-grid {
+                column-count: 2;
+            }
+            body {
+                padding: 12px;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .masonry-grid {
+                column-count: 1;
+            }
+        }
+        
+        /* Retro Card Style for Contents */
+        .contents-card {
+            background: var(--cream);
+            border: 2px solid var(--dark);
+            border-radius: 4px;
+            padding: 20px 16px;
+            text-align: center;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            position: relative;
+            box-shadow: 4px 4px 0 var(--dark);
+        }
+        
+        .contents-card:hover {
+            transform: translate(-2px, -2px);
+            box-shadow: 6px 6px 0 var(--dark);
+        }
+        
+        .contents-card:active {
+            transform: translate(2px, 2px);
+            box-shadow: 2px 2px 0 var(--dark);
+        }
+        
+        .contents-card .card-number {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--dark);
+            line-height: 1;
+            margin-bottom: 8px;
+            font-family: Georgia, serif;
+        }
+        
+        .contents-card .card-label {
+            font-size: 10px;
+            color: #888;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 4px;
+        }
+        
+        .contents-card .card-title {
+            font-size: 14px;
+            font-weight: 700;
+            color: var(--dark);
+        }
+        
+        .skill-tag {
+            background: var(--light-lavender);
+            border: 1px solid var(--medium-lavender);
+            padding: 6px 12px;
+            border-radius: 50px;
+            font-size: 12px;
+            transition: all 0.2s ease;
+        }
+        
+        .skill-tag:hover {
+            background: var(--primary-lavender);
+            transform: translateY(-1px);
+        }
+        
+        .accent-box {
+            background: var(--primary-lavender);
+            border: 1px solid var(--medium-lavender);
+        }
+        
+        .fade-in {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 0.6s ease;
+        }
+        
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        .image-frame {
+            position: relative;
+            border-radius: 12px;
+            overflow: hidden;
+            border: 1px solid rgba(0,0,0,0.08);
+        }
+        
+        .content-wrapper {
+            padding: 0 48px;
+        }
+        
+        @media (max-width: 768px) {
+            .content-wrapper {
+                padding: 0 24px;
+            }
+        }
+        
+        .divider-line {
+            height: 1px;
+            background: linear-gradient(90deg, transparent, var(--medium-lavender), transparent);
+            margin: 0 48px;
+        }
+    </style>
+</head>
+<body>
+    <div class="portfolio-container">
+        <!-- Page 1: Cover / Home -->
+        <div class="page page-home" id="home" style="background: linear-gradient(135deg, #faf8f5 0%, #f5f0fa 50%, #f0ede8 100%);">
+            <!-- Header -->
+            <div class="folder-header">
+                <div class="flex items-center gap-6 flex-wrap">
+                    <div class="flex items-center">
+                        <span>NAME</span>
+                        <span class="value">麻欣悦</span>
+                    </div>
+                    <div class="flex items-center">
+                        <span>FILE#</span>
+                        <span class="value">Portfolio</span>
+                    </div>
+                    <div class="flex items-center">
+                        <span>DATE</span>
+                        <span class="value" id="currentDate"></span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="flex-1 flex items-center">
+                <div class="content-wrapper py-8 w-full">
+                    <div class="grid lg:grid-cols-2 gap-10 items-center">
+                        <!-- Left Content -->
+                        <div class="fade-in">
+                            <p class="text-xs text-gray-500 mb-3 tracking-widest">PORTFOLIO / 作品集</p>
+                            <h1 class="text-4xl lg:text-5xl font-bold text-gray-900 mb-4 leading-tight">
+                                Hello，<br>
+                                <span class="text-3xl lg:text-4xl">欢迎来到我的作品集</span>
+                            </h1>
+                            
+                            <div class="w-16 h-0.5 bg-gray-900 mb-5"></div>
+                            
+                            <p class="text-sm text-gray-600 leading-relaxed mb-6">
+                                秉持对<span class="highlight-text">可持续发展</span>的专业追求，我致力于将ESG思考逻辑转化为有温度的品牌叙事，让企业传播在碎片化时代实现精准的社会价值落地。
+                            </p>
+                            
+                            <!-- Contact Grid -->
+                            <div class="grid grid-cols-2 gap-2 mb-6">
+                                <div class="card-white p-3">
+                                    <p class="info-label">电话</p>
+                                    <p class="info-value">+86 13282222387</p>
+                                </div>
+                                <div class="card-white p-3">
+                                    <p class="info-label">邮箱</p>
+                                    <p class="info-value">xinyue.ma@duke.edu</p>
+                                </div>
+                                <div class="card-white p-3">
+                                    <p class="info-label">微信</p>
+                                    <p class="info-value">Qwbazx2012</p>
+                                </div>
+                                <div class="card-white p-3">
+                                    <p class="info-label">小红书</p>
+                                    <p class="info-value">幸福眨眼兔</p>
+                                </div>
+                            </div>
+                            
+                            <a href="assets/麻欣悦-杜克大学-环境政策硕士27届.pdf" download class="download-btn">
+                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/>
+                                </svg>
+                                Download Resume
+                            </a>
+                        </div>
+                        
+                        <!-- Right: Photo & Stats -->
+                        <div class="fade-in" style="transition-delay: 0.2s;">
+                            <div class="card-white p-5">
+                                <div class="image-frame mb-5">
+                                    <img src="https://i.postimg.cc/GhZ003c8/2.jpg" alt="麻欣悦" class="w-full h-auto">
+                                </div>
+                                
+                                <!-- Stats Grid -->
+                                <div class="grid grid-cols-4 gap-2">
+                                    <div class="text-center p-2 accent-box rounded-lg">
+                                        <p class="text-xl font-bold text-gray-900">3+</p>
+                                        <p class="text-gray-600 text-xs">实习经历</p>
+                                    </div>
+                                    <div class="text-center p-2 accent-box rounded-lg">
+                                        <p class="text-xl font-bold text-gray-900">10+</p>
+                                        <p class="text-gray-600 text-xs">ESG项目</p>
+                                    </div>
+                                    <div class="text-center p-2 accent-box rounded-lg">
+                                        <p class="text-xl font-bold text-gray-900">350+</p>
+                                        <p class="text-gray-600 text-xs">报告分析</p>
+                                    </div>
+                                    <div class="text-center p-2 accent-box rounded-lg">
+                                        <p class="text-xl font-bold text-gray-900">21万</p>
+                                        <p class="text-gray-600 text-xs">最高播放</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Scroll Indicator -->
+            <div class="text-center pb-6">
+                <div class="animate-bounce">
+                    <svg class="w-5 h-5 mx-auto text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3"/>
+                    </svg>
+                </div>
+            </div>
+        </div>
+        
+        <div class="divider-line"></div>
+        
+        <!-- Page 2: Contents / Directory -->
+        <div class="page" id="contents" style="background: var(--cream);">
+            <div class="folder-header">
+                <div class="flex items-center gap-6 flex-wrap">
+                    <div class="flex items-center">
+                        <span>NAME</span>
+                        <span class="value">麻欣悦</span>
+                    </div>
+                    <div class="flex items-center">
+                        <span>FILE#</span>
+                        <span class="value">Portfolio</span>
+                    </div>
+                    <div class="flex items-center">
+                        <span>DATE</span>
+                        <span class="value currentDateSpan"></span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="content-wrapper py-16">
+                <div class="text-center mb-12 fade-in">
+                    <p class="text-xs text-gray-500 mb-3 tracking-widest">DIRECTORY</p>
+                    <h2 class="text-4xl font-bold text-gray-900 mb-3" style="font-family: Georgia, serif; font-style: italic;">Contents</h2>
+                    <p class="text-gray-500 text-sm">（文件目录）</p>
+                    <div class="w-24 h-px bg-gray-300 mx-auto mt-5"></div>
+                </div>
+                
+                <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
+                    <a href="#advantages" class="contents-card fade-in" style="transition-delay: 0.1s;">
+                        <div class="card-number">01</div>
+                        <div class="card-label">Part</div>
+                        <div class="card-title">核心优势</div>
+                    </a>
+                    
+                    <a href="#education" class="contents-card fade-in" style="transition-delay: 0.15s;">
+                        <div class="card-number">02</div>
+                        <div class="card-label">Part</div>
+                        <div class="card-title">教育经历</div>
+                    </a>
+                    
+                    <a href="#internship" class="contents-card fade-in" style="transition-delay: 0.2s;">
+                        <div class="card-number">03</div>
+                        <div class="card-label">Part</div>
+                        <div class="card-title">实习经历</div>
+                    </a>
+                    
+                    <a href="#projects" class="contents-card fade-in" style="transition-delay: 0.25s;">
+                        <div class="card-number">04</div>
+                        <div class="card-label">Part</div>
+                        <div class="card-title">项目经历</div>
+                    </a>
+                    
+                    <a href="#campus" class="contents-card fade-in" style="transition-delay: 0.3s;">
+                        <div class="card-number">05</div>
+                        <div class="card-label">Part</div>
+                        <div class="card-title">校园经历</div>
+                    </a>
+                    
+                    <a href="#about" class="contents-card fade-in" style="transition-delay: 0.35s;">
+                        <div class="card-number">06</div>
+                        <div class="card-label">Part</div>
+                        <div class="card-title">自我评价</div>
+                    </a>
+                </div>
+            </div>
+        </div>
+        
+        <div class="divider-line"></div>
+        
+        <!-- Page 3: Core Advantages -->
+        <div class="page" id="advantages" style="background: var(--white);">
+            <div class="folder-header">
+                <div class="flex items-center gap-6 flex-wrap">
+                    <div class="flex items-center">
+                        <span>NAME</span>
+                        <span class="value">麻欣悦</span>
+                    </div>
+                    <div class="flex items-center">
+                        <span>FILE#</span>
+                        <span class="value">Portfolio</span>
+                    </div>
+                    <div class="flex items-center">
+                        <span>DATE</span>
+                        <span class="value currentDateSpan"></span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="content-wrapper py-12">
+                <div class="mb-10 fade-in">
+                    <p class="text-xs text-gray-400 mb-2 tracking-widest">PART 01</p>
+                    <h2 class="section-title">核心优势</h2>
+                    <p class="section-subtitle">Core Advantages</p>
+                </div>
+                
+                <div class="grid md:grid-cols-2 gap-5">
+                    <div class="card-white p-6 fade-in hover:shadow-md transition-all" style="transition-delay: 0.1s;">
+                        <div class="flex items-start gap-4">
+                            <div class="number-badge flex-shrink-0">01</div>
+                            <div>
+                                <h3 class="font-bold text-base text-gray-900 mb-2">复合教育背景优势</h3>
+                                <p class="text-gray-600 leading-relaxed text-sm">
+                                    目前就读于<span class="highlight-text">杜克大学环境政策硕士</span>项目，系统掌握环境经济学、ESG投资、碳核算与政策分析方法。结合本科物联网工程的数据与技术背景，形成可持续发展与商业分析融合视角。
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="card-white p-6 fade-in hover:shadow-md transition-all" style="transition-delay: 0.15s;">
+                        <div class="flex items-start gap-4">
+                            <div class="number-badge flex-shrink-0">02</div>
+                            <div>
+                                <h3 class="font-bold text-base text-gray-900 mb-2">ESG战略与供应链诊断经验</h3>
+                                <p class="text-gray-600 leading-relaxed text-sm">
+                                    在<span class="highlight-text">凯捷咨询</span>参与头部物流企业ESG战略转型项目，通过研究350+行业报告及案例，搭建完整的ESG诊断框架，提出12项可落地策略，相关建议被企业采纳。
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="card-white p-6 fade-in hover:shadow-md transition-all" style="transition-delay: 0.2s;">
+                        <div class="flex items-start gap-4">
+                            <div class="number-badge flex-shrink-0">03</div>
+                            <div>
+                                <h3 class="font-bold text-base text-gray-900 mb-2">ESG传播与CSR品牌塑造能力</h3>
+                                <p class="text-gray-600 leading-relaxed text-sm">
+                                    在<span class="highlight-text">携程集团可持续发展部门</span>实习期间，参与年度ESG报告撰写与企业社会责任传播，策划执行10+场ESG主题传播活动，提升企业社会影响力与公众认知。
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="card-white p-6 fade-in hover:shadow-md transition-all" style="transition-delay: 0.25s;">
+                        <div class="flex items-start gap-4">
+                            <div class="number-badge flex-shrink-0">04</div>
+                            <div>
+                                <h3 class="font-bold text-base text-gray-900 mb-2">跨国项目领导与战略规划能力</h3>
+                                <p class="text-gray-600 leading-relaxed text-sm">
+                                    曾担任<span class="highlight-text">南洋理工大学</span>跨学科项目团队队长，领导国际团队完成可持续创新研究，构建融合科技、文旅与政策的创新发展框架，项目成果获评最佳小组。
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="divider-line"></div>
+        
+        <!-- Page 4: Education -->
+        <div class="page" id="education" style="background: linear-gradient(180deg, #faf8f5 0%, var(--white) 100%);">
+            <div class="folder-header">
+                <div class="flex items-center gap-6 flex-wrap">
+                    <div class="flex items-center">
+                        <span>NAME</span>
+                        <span class="value">麻欣悦</span>
+                    </div>
+                    <div class="flex items-center">
+                        <span>FILE#</span>
+                        <span class="value">Portfolio</span>
+                    </div>
+                    <div class="flex items-center">
+                        <span>DATE</span>
+                        <span class="value currentDateSpan"></span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="content-wrapper py-12">
+                <div class="mb-10 fade-in">
+                    <p class="text-xs text-gray-400 mb-2 tracking-widest">PART 02</p>
+                    <h2 class="section-title">教育经历</h2>
+                    <p class="section-subtitle">Education Background</p>
+                </div>
+                
+                <div class="grid lg:grid-cols-2 gap-5 mb-8">
+                    <!-- Duke -->
+                    <div class="card-white p-6 fade-in" style="transition-delay: 0.1s;">
+                        <div class="flex items-center justify-between mb-4">
+                            <h3 class="font-bold text-lg text-gray-900">杜克大学</h3>
+                            <span class="accent-box px-3 py-1 rounded-full text-xs font-medium text-gray-700">2025.08 — 2027.05</span>
+                        </div>
+                        <p class="text-purple-700 font-semibold mb-4">环境政策硕士</p>
+                        
+                        <div class="mb-4">
+                            <p class="text-xs text-gray-500 mb-2">核心课程</p>
+                            <div class="flex flex-wrap gap-1.5">
+                                <span class="skill-tag text-xs">统计与项目评估（A）</span>
+                                <span class="skill-tag text-xs">环境经济学（A-）</span>
+                                <span class="skill-tag text-xs">ESG投资</span>
+                                <span class="skill-tag text-xs">自然资源管理</span>
+                            </div>
+                        </div>
+                        
+                        <div class="accent-box rounded-xl p-3 text-center">
+                            <p class="font-bold text-gray-900">GPA：3.8 / 4.0</p>
+                        </div>
+                    </div>
+                    
+                    <!-- HAUT -->
+                    <div class="card-white p-6 fade-in" style="transition-delay: 0.15s;">
+                        <div class="flex items-center justify-between mb-4">
+                            <h3 class="font-bold text-lg text-gray-900">河南工业大学</h3>
+                            <span class="accent-box px-3 py-1 rounded-full text-xs font-medium text-gray-700">2021.09 — 2025.07</span>
+                        </div>
+                        <p class="text-purple-700 font-semibold mb-4">物联网工程 荣誉学士</p>
+                        
+                        <div class="mb-3">
+                            <p class="text-xs text-gray-500 mb-2">荣誉奖项</p>
+                            <ul class="text-xs text-gray-600 space-y-0.5">
+                                <li>• 三好学生（3次）· 校二等奖学金（Top 2%）</li>
+                                <li>• 全国大学生英语竞赛国家三等奖</li>
+                                <li>• 互联网+创新创业大赛省一等奖</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="accent-box rounded-xl p-3 text-center">
+                            <p class="font-bold text-gray-900 text-sm">GPA：3.76 / 5.0 | 专业排名：前10%</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Skills -->
+                <div class="card-white p-6 fade-in" style="transition-delay: 0.2s;">
+                    <h3 class="font-bold text-base text-gray-900 mb-4">专业技能 / Professional Skills</h3>
+                    <div class="grid md:grid-cols-2 gap-6">
+                        <div>
+                            <p class="text-xs text-gray-500 mb-2">数据分析工具</p>
+                            <div class="flex flex-wrap gap-1.5">
+                                <span class="bg-gray-900 text-white px-3 py-1.5 rounded-full text-xs">MS Office</span>
+                                <span class="bg-gray-900 text-white px-3 py-1.5 rounded-full text-xs">SQL</span>
+                                <span class="bg-gray-900 text-white px-3 py-1.5 rounded-full text-xs">Excel</span>
+                                <span class="bg-gray-900 text-white px-3 py-1.5 rounded-full text-xs">Python</span>
+                            </div>
+                        </div>
+                        <div>
+                            <p class="text-xs text-gray-500 mb-2">相关能力</p>
+                            <div class="flex flex-wrap gap-1.5">
+                                <span class="bg-gray-900 text-white px-3 py-1.5 rounded-full text-xs">IELTS 6.5</span>
+                                <span class="bg-gray-900 text-white px-3 py-1.5 rounded-full text-xs">SWOT分析</span>
+                                <span class="bg-gray-900 text-white px-3 py-1.5 rounded-full text-xs">碳核算</span>
+                                <span class="bg-gray-900 text-white px-3 py-1.5 rounded-full text-xs">ESG投资分析</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="divider-line"></div>
+        
+        <!-- Page 5: Internship Experience -->
+        <div class="page" id="internship" style="background: var(--white);">
+            <div class="folder-header">
+                <div class="flex items-center gap-6 flex-wrap">
+                    <div class="flex items-center">
+                        <span>NAME</span>
+                        <span class="value">麻欣悦</span>
+                    </div>
+                    <div class="flex items-center">
+                        <span>FILE#</span>
+                        <span class="value">Portfolio</span>
+                    </div>
+                    <div class="flex items-center">
+                        <span>DATE</span>
+                        <span class="value currentDateSpan"></span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="content-wrapper py-12">
+                <div class="mb-10 fade-in">
+                    <p class="text-xs text-gray-400 mb-2 tracking-widest">PART 03</p>
+                    <h2 class="section-title">实习经历</h2>
+                    <p class="section-subtitle">Internship Experience</p>
+                </div>
+                
+                <!-- Timeline -->
+                <div class="space-y-5">
+                    <!-- Ctrip -->
+                    <div class="card-white p-6 fade-in" style="transition-delay: 0.1s; border-left: 3px solid #6b5b95;">
+                        <div class="flex flex-wrap items-center justify-between mb-4">
+                            <div>
+                                <h3 class="text-lg font-bold text-gray-900">携程集团</h3>
+                                <p class="text-purple-700 font-medium text-sm">ESG实习生 | 可持续发展部门</p>
+                            </div>
+                            <span class="accent-box px-4 py-1.5 rounded-full font-semibold text-xs text-gray-700">2026.02 — 至今</span>
+                        </div>
+                        
+                        <div class="grid md:grid-cols-3 gap-3">
+                            <div class="bg-gray-50 rounded-xl p-4 border border-gray-100">
+                                <h4 class="font-bold text-gray-900 mb-2 text-sm flex items-center gap-2">
+                                    <span class="w-1.5 h-1.5 bg-purple-500 rounded-full"></span>
+                                    ESG报告编制
+                                </h4>
+                                <p class="text-gray-600 text-xs leading-relaxed">
+                                    独立负责2025年可持续发展报告"社区友好"与"家庭友好"章节，对标GRI标准及SDG目标进行合规性审查。
+                                </p>
+                            </div>
+                            <div class="bg-gray-50 rounded-xl p-4 border border-gray-100">
+                                <h4 class="font-bold text-gray-900 mb-2 text-sm flex items-center gap-2">
+                                    <span class="w-1.5 h-1.5 bg-purple-500 rounded-full"></span>
+                                    ESG传播策划
+                                </h4>
+                                <p class="text-gray-600 text-xs leading-relaxed">
+                                    策划妇女节"微光向暖"、春节返乡办公等10+场ESG传播活动，对接中国新闻周刊等媒体。
+                                </p>
+                            </div>
+                            <div class="bg-gray-50 rounded-xl p-4 border border-gray-100">
+                                <h4 class="font-bold text-gray-900 mb-2 text-sm flex items-center gap-2">
+                                    <span class="w-1.5 h-1.5 bg-purple-500 rounded-full"></span>
+                                    战略支持
+                                </h4>
+                                <p class="text-gray-600 text-xs leading-relaxed">
+                                    分析腾讯SSV、阿里公益等案例，为CSV战略提供优化建议，协助创始人国际会议演讲资料整理。
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- ByteDance -->
+                    <div class="card-white p-6 fade-in" style="transition-delay: 0.15s; border-left: 3px solid #8b7da8;">
+                        <div class="flex flex-wrap items-center justify-between mb-4">
+                            <div>
+                                <h3 class="text-lg font-bold text-gray-900">字节跳动</h3>
+                                <p class="text-purple-700 font-medium text-sm">商业分析与产品战略实习生</p>
+                            </div>
+                            <span class="accent-box px-4 py-1.5 rounded-full font-semibold text-xs text-gray-700">2025.11 — 2025.12</span>
+                        </div>
+                        
+                        <div class="grid md:grid-cols-2 gap-3">
+                            <div class="bg-gray-50 rounded-xl p-4 border border-gray-100">
+                                <h4 class="font-bold text-gray-900 mb-2 text-sm flex items-center gap-2">
+                                    <span class="w-1.5 h-1.5 bg-purple-400 rounded-full"></span>
+                                    商业战略研究
+                                </h4>
+                                <p class="text-gray-600 text-xs leading-relaxed">
+                                    使用SWOT分析与商业模式画布对平台战略进行系统研究，通过行业对标识别关键短板。
+                                </p>
+                            </div>
+                            <div class="bg-gray-50 rounded-xl p-4 border border-gray-100">
+                                <h4 class="font-bold text-gray-900 mb-2 text-sm flex items-center gap-2">
+                                    <span class="w-1.5 h-1.5 bg-purple-400 rounded-full"></span>
+                                    消费者行为研究
+                                </h4>
+                                <p class="text-gray-600 text-xs leading-relaxed">
+                                    独立完成用户研究全流程（N=108），输出研究报告，驱动"平台信任重构"战略路线图制定。
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Capgemini -->
+                    <div class="card-white p-6 fade-in" style="transition-delay: 0.2s; border-left: 3px solid #a99fc2;">
+                        <div class="flex flex-wrap items-center justify-between mb-4">
+                            <div>
+                                <h3 class="text-lg font-bold text-gray-900">凯捷咨询</h3>
+                                <p class="text-purple-700 font-medium text-sm">咨询顾问助理（供应链ESG战略方向）</p>
+                            </div>
+                            <span class="accent-box px-4 py-1.5 rounded-full font-semibold text-xs text-gray-700">2023.07 — 2023.08</span>
+                        </div>
+                        
+                        <div class="grid md:grid-cols-2 gap-3">
+                            <div class="bg-gray-50 rounded-xl p-4 border border-gray-100">
+                                <h4 class="font-bold text-gray-900 mb-2 text-sm flex items-center gap-2">
+                                    <span class="w-1.5 h-1.5 bg-purple-300 rounded-full"></span>
+                                    ESG供应链诊断
+                                </h4>
+                                <p class="text-gray-600 text-xs leading-relaxed">
+                                    研究350+行业报告与案例，独立搭建ESG分析框架，定位仓储能耗与运输路径碳排放关键痛点。
+                                </p>
+                            </div>
+                            <div class="bg-gray-50 rounded-xl p-4 border border-gray-100">
+                                <h4 class="font-bold text-gray-900 mb-2 text-sm flex items-center gap-2">
+                                    <span class="w-1.5 h-1.5 bg-purple-300 rounded-full"></span>
+                                    数据建模与策略输出
+                                </h4>
+                                <p class="text-gray-600 text-xs leading-relaxed">
+                                    基于全国运输数据进行碳排放建模，提出12项可落地方案，获客户采纳作为战略行动计划核心输入。
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="divider-line"></div>
+        
+        <!-- Page 6: Project Experience -->
+        <div class="page" id="projects" style="background: linear-gradient(180deg, #faf8f5 0%, var(--white) 100%);">
+            <div class="folder-header">
+                <div class="flex items-center gap-6 flex-wrap">
+                    <div class="flex items-center">
+                        <span>NAME</span>
+                        <span class="value">麻欣悦</span>
+                    </div>
+                    <div class="flex items-center">
+                        <span>FILE#</span>
+                        <span class="value">Portfolio</span>
+                    </div>
+                    <div class="flex items-center">
+                        <span>DATE</span>
+                        <span class="value currentDateSpan"></span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="content-wrapper py-12">
+                <div class="mb-10 fade-in">
+                    <p class="text-xs text-gray-400 mb-2 tracking-widest">PART 04</p>
+                    <h2 class="section-title">项目经历</h2>
+                    <p class="section-subtitle">Project Experience</p>
+                </div>
+                
+                <!-- NTU Project -->
+                <div class="card-white p-6 mb-5 fade-in" style="transition-delay: 0.1s;">
+                    <div class="flex flex-wrap items-center justify-between mb-5">
+                        <div>
+                            <h3 class="text-lg font-bold text-gray-900">南洋理工大学</h3>
+                            <p class="text-purple-700 font-medium text-sm">社会科学与量化研究项目 | 团队队长</p>
+                        </div>
+                        <span class="accent-box px-4 py-1.5 rounded-full font-semibold text-xs text-gray-700">2024.01</span>
+                    </div>
+                    
+                    <div class="grid lg:grid-cols-2 gap-6">
+                        <div>
+                            <div class="mb-4">
+                                <h4 class="font-bold text-gray-900 mb-2 text-sm">研究洞察</h4>
+                                <p class="text-gray-600 text-xs leading-relaxed mb-3">
+                                    通过<span class="highlight-text">100+文献综述</span>与案例研究，从环境、社会、治理三维度分析数字技术的可持续创新。
+                                </p>
+                            </div>
+                            
+                            <div>
+                                <h4 class="font-bold text-gray-900 mb-2 text-sm">战略输出</h4>
+                                <p class="text-gray-600 text-xs leading-relaxed">
+                                    主导设计融合科技、文旅与政策的跨领域发展框架，提出智能导航产品等商业建议。
+                                </p>
+                                <div class="mt-3 inline-block accent-box px-3 py-1.5 rounded-full font-semibold text-xs text-gray-700">
+                                    🏆 Best Team（最佳小组）
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="gallery-row">
+                            <img src="https://i.postimg.cc/pXgNNV29/3.jpg" alt="南洋理工大学项目Pre">
+                            <img src="https://i.postimg.cc/ncs8w9tG/4.png" alt="团队获得荣誉">
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Xishuangbanna -->
+                <div class="card-white p-6 mb-5 fade-in" style="transition-delay: 0.15s;">
+                    <div class="flex flex-wrap items-center justify-between mb-5">
+                        <div>
+                            <h3 class="text-lg font-bold text-gray-900">西双版纳茶产业可持续项目</h3>
+                            <p class="text-purple-700 font-medium text-sm">社会调查成员</p>
+                        </div>
+                        <span class="accent-box px-4 py-1.5 rounded-full font-semibold text-xs text-gray-700">2025.11 — 2026.01</span>
+                    </div>
+                    
+                    <div class="grid lg:grid-cols-2 gap-6">
+                        <div>
+                            <div class="grid grid-cols-3 gap-3 mb-4">
+                                <div class="accent-box p-3 rounded-lg text-center">
+                                    <p class="font-bold text-xl text-gray-900">20+</p>
+                                    <p class="text-gray-600 text-xs">户家庭抽样</p>
+                                </div>
+                                <div class="accent-box p-3 rounded-lg text-center">
+                                    <p class="font-bold text-xl text-gray-900">7</p>
+                                    <p class="text-gray-600 text-xs">天实地调研</p>
+                                </div>
+                                <div class="accent-box p-3 rounded-lg text-center">
+                                    <p class="font-bold text-xl text-gray-900">100%</p>
+                                    <p class="text-gray-600 text-xs">访谈完成率</p>
+                                </div>
+                            </div>
+                            <p class="text-gray-600 text-xs leading-relaxed">
+                                主导前期调研，设计访谈提纲；7天实地调研中牵头完成全部深度访谈；负责数据编码与主题分析，项目已推送至<span class="highlight-text">财富杯ESG案例分析大赛</span>。
+                            </p>
+                        </div>
+                        
+                        <div class="gallery-row">
+                            <img src="https://i.postimg.cc/28PppjzB/5.jpg" alt="西双版纳项目">
+                            <img src="https://i.postimg.cc/bNKXXYzH/6.jpg" alt="项目最终Pre">
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Ctrip ESG -->
+                <div class="card-white p-6 fade-in" style="transition-delay: 0.2s;">
+                    <div class="mb-5">
+                        <h3 class="text-lg font-bold text-gray-900">携程ESG传播项目</h3>
+                        <p class="text-purple-700 font-medium text-sm">CSR公益项目传播 | 女性成长项目传播 | 全球危机应急服务传播</p>
+                    </div>
+                    
+                    <div class="masonry-grid">
+                        <div class="masonry-item">
+                            <img src="https://i.postimg.cc/T3mzT81h/2026quan-qiu-sheng-yu-wei-ji-lun-tan.png" alt="2026全球生育危机论坛">
+                            <p class="text-xs text-gray-500 mt-1.5 text-center">2026全球生育危机论坛</p>
+                        </div>
+                        <div class="masonry-item">
+                            <img src="https://i.postimg.cc/y89M7qx8/san-ba-fu-nu-jie-yu-ai-zi-de.jpg" alt="三八妇女节予爱自得">
+                            <p class="text-xs text-gray-500 mt-1.5 text-center">三八妇女节"予爱自得"</p>
+                        </div>
+                        <div class="masonry-item">
+                            <img src="https://i.postimg.cc/ZqS1Rfvv/xie-cheng-san-ba-fu-nu-jie-zong-zhu-ti-wei-guang-xiang-nuan-zi-you-hui-xiang.jpg" alt="携程三八妇女节总主题">
+                            <p class="text-xs text-gray-500 mt-1.5 text-center">携程三八妇女节"微光向暖"</p>
+                        </div>
+                        <div class="masonry-item">
+                            <img src="https://i.postimg.cc/Hk5qTGnx/chun-jie-ke-fu-tuan-dui-fan-xiang-ban-gong.jpg" alt="春节客服团队返乡办公">
+                            <p class="text-xs text-gray-500 mt-1.5 text-center">春节客服团队返乡办公</p>
+                        </div>
+                        <div class="masonry-item">
+                            <img src="https://i.postimg.cc/vZ9JGRTT/wang-dan-dan-chun-jie-fan-xiang-gu-shi.png" alt="王丹丹春节返乡故事">
+                            <p class="text-xs text-gray-500 mt-1.5 text-center">王丹丹春节返乡故事</p>
+                        </div>
+                        <div class="masonry-item">
+                            <img src="https://i.postimg.cc/25DP6HLS/xie-cheng-gong-yi-xiao-xiao-de-xin-yuan-bang-zhu-huan-bing-er-tong-shi-xian-xin-yuan.png" alt="携程公益——小小的心愿">
+                            <p class="text-xs text-gray-500 mt-1.5 text-center">携程公益——帮助患病儿童实现心愿</p>
+                        </div>
+                        <div class="masonry-item">
+                            <img src="https://i.postimg.cc/hGBHjCQf/xie-cheng-gong-yi-yuan-wang-cheng-zhen-ji-jin-hui.webp" alt="携程公益愿望成真基金会">
+                            <p class="text-xs text-gray-500 mt-1.5 text-center">携程公益愿望成真基金会</p>
+                        </div>
+                        <div class="masonry-item">
+                            <img src="https://i.postimg.cc/wBpSvWR1/xie-cheng-lu-xing-mu-lan-ji-hua-qing-xun-ying.png" alt="携程旅行木兰计划">
+                            <p class="text-xs text-gray-500 mt-1.5 text-center">携程旅行木兰计划——青训营</p>
+                        </div>
+                        <div class="masonry-item">
+                            <img src="https://i.postimg.cc/DzTtZC4r/zhong-dong-ju-shi-quan-qiu-jin-ji-zhi-yuan-fu-wu.webp" alt="中东局势全球紧急支援服务">
+                            <p class="text-xs text-gray-500 mt-1.5 text-center">中东局势全球紧急支援服务</p>
+                        </div>
+                        <div class="masonry-item">
+                            <img src="https://i.postimg.cc/JhL9nTHZ/yin-zhong-dong-ju-shi-xie-cheng-wei-lu-ke-ti-gong-bao-zhang.jpg" alt="携程为旅客提供保障">
+                            <p class="text-xs text-gray-500 mt-1.5 text-center">因中东局势携程为旅客提供保障</p>
+                        </div>
+                        <div class="masonry-item">
+                            <img src="https://i.postimg.cc/1zQLtWV0/zhong-dong-wei-ji-xie-cheng-ke-fu-zhi-chi-jiu-yuan.png" alt="中东危机携程客服支持救援">
+                            <p class="text-xs text-gray-500 mt-1.5 text-center">中东危机携程客服支持救援</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="divider-line"></div>
+        
+        <!-- Page 7: Campus Experience -->
+        <div class="page" id="campus" style="background: var(--white);">
+            <div class="folder-header">
+                <div class="flex items-center gap-6 flex-wrap">
+                    <div class="flex items-center">
+                        <span>NAME</span>
+                        <span class="value">麻欣悦</span>
+                    </div>
+                    <div class="flex items-center">
+                        <span>FILE#</span>
+                        <span class="value">Portfolio</span>
+                    </div>
+                    <div class="flex items-center">
+                        <span>DATE</span>
+                        <span class="value currentDateSpan"></span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="content-wrapper py-12">
+                <div class="mb-10 fade-in">
+                    <p class="text-xs text-gray-400 mb-2 tracking-widest">PART 05</p>
+                    <h2 class="section-title">校园经历</h2>
+                    <p class="section-subtitle">Campus Experience</p>
+                </div>
+                
+                <div class="card-white p-6 fade-in" style="transition-delay: 0.1s;">
+                    <div class="flex flex-wrap items-center justify-between mb-6">
+                        <div>
+                            <h3 class="text-lg font-bold text-gray-900">杜克大学校园大使</h3>
+                            <p class="text-purple-700 font-medium text-sm">内容运营 & 直播分享</p>
+                        </div>
+                        <span class="accent-box px-4 py-1.5 rounded-full font-semibold text-xs text-gray-700">2025.09 — 至今</span>
+                    </div>
+                    
+                    <div class="grid lg:grid-cols-2 gap-8">
+                        <div>
+                            <h4 class="font-bold text-gray-900 mb-3 text-sm">主要工作</h4>
+                            <ul class="space-y-3 mb-6">
+                                <li class="flex items-start gap-3">
+                                    <span class="number-badge w-8 h-8 text-sm flex-shrink-0">1</span>
+                                    <span class="text-gray-600 text-sm">独立运营小红书账号，策划发布留学申请与跨专业学习内容</span>
+                                </li>
+                                <li class="flex items-start gap-3">
+                                    <span class="number-badge w-8 h-8 text-sm flex-shrink-0">2</span>
+                                    <span class="text-gray-600 text-sm">留学申请经验分享与跨专业学习经验分享</span>
+                                </li>
+                                <li class="flex items-start gap-3">
+                                    <span class="number-badge w-8 h-8 text-sm flex-shrink-0">3</span>
+                                    <span class="text-gray-600 text-sm">作为主讲嘉宾参与10+场留学分享直播</span>
+                                </li>
+                            </ul>
+                            
+                            <div class="grid grid-cols-3 gap-3">
+                                <div class="card-dark p-4 text-center">
+                                    <p class="text-xl font-bold text-white mb-0.5">700+</p>
+                                    <p class="text-gray-400 text-xs">粉丝增长</p>
+                                </div>
+                                <div class="card-dark p-4 text-center">
+                                    <p class="text-xl font-bold text-white mb-0.5">2万+</p>
+                                    <p class="text-gray-400 text-xs">累计互动</p>
+                                </div>
+                                <div class="card-dark p-4 text-center">
+                                    <p class="text-xl font-bold text-white mb-0.5">21万+</p>
+                                    <p class="text-gray-400 text-xs">最高播放</p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="gallery-row">
+                            <img src="https://i.postimg.cc/hPHFF4SL/7.jpg" alt="校园大使1">
+                            <img src="https://i.postimg.cc/3JPMMrKB/8.png" alt="校园大使2">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="divider-line"></div>
+        
+        <!-- Page 8: Self Evaluation -->
+        <div class="page" id="about" style="background: linear-gradient(180deg, #faf8f5 0%, var(--primary-lavender) 100%);">
+            <div class="folder-header">
+                <div class="flex items-center gap-6 flex-wrap">
+                    <div class="flex items-center">
+                        <span>NAME</span>
+                        <span class="value">麻欣悦</span>
+                    </div>
+                    <div class="flex items-center">
+                        <span>FILE#</span>
+                        <span class="value">Portfolio</span>
+                    </div>
+                    <div class="flex items-center">
+                        <span>DATE</span>
+                        <span class="value currentDateSpan"></span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="content-wrapper py-12">
+                <div class="mb-10 fade-in">
+                    <p class="text-xs text-gray-400 mb-2 tracking-widest">PART 06</p>
+                    <h2 class="section-title">自我评价</h2>
+                    <p class="section-subtitle">About Me</p>
+                </div>
+                
+                <!-- Evaluation 1 -->
+                <div class="card-white p-6 mb-5 fade-in" style="transition-delay: 0.1s;">
+                    <div class="flex items-start gap-4 mb-5">
+                        <div class="number-badge flex-shrink-0">01</div>
+                        <div>
+                            <h3 class="text-base font-bold text-gray-900 mb-2">卓越的团队统领力与协作共创力</h3>
+                            <p class="text-gray-600 leading-relaxed text-sm mb-2">
+                                我具备将多元背景的团队凝聚在一起，并朝着共同目标冲刺的能力。在任何团队环境中，我不止是一个参与者，更是能够<span class="highlight-text">洞察成员优势、协调复杂利益关系</span>并最终带队取得成果的组织者。
+                            </p>
+                            <p class="text-gray-600 leading-relaxed text-sm">
+                                无论是在跨国研究项目，还是企业跨部门合作中，我都能够通过清晰的沟通与结构化的组织方式，使团队实现 <span class="highlight-text">1+1>2</span> 的协同价值。
+                            </p>
+                        </div>
+                    </div>
+                    <div class="gallery-row">
+                        <img src="https://i.postimg.cc/5NZcc9xk/9.jpg" alt="团队协作1">
+                        <img src="https://i.postimg.cc/WbQRRp2H/10.jpg" alt="团队协作2">
+                        <img src="https://i.postimg.cc/NfWhhGgZ/11.jpg" alt="团队协作3">
+                    </div>
+                </div>
+                
+                <!-- Evaluation 2 -->
+                <div class="card-white p-6 mb-5 fade-in" style="transition-delay: 0.15s;">
+                    <div class="flex items-start gap-4 mb-5">
+                        <div class="number-badge flex-shrink-0">02</div>
+                        <div>
+                            <h3 class="text-base font-bold text-gray-900 mb-2">极具感染力的跨界表达力与品牌叙事力</h3>
+                            <p class="text-gray-600 leading-relaxed text-sm mb-2">
+                                我擅长将复杂的专业议题转化为具有传播力和情感共鸣的表达。在直播分享、公开演讲及内容创作中，我能够通过<span class="highlight-text">清晰的叙事逻辑与良好的临场表达能力</span>，与受众建立深层连接。
+                            </p>
+                            <p class="text-gray-600 leading-relaxed text-sm">
+                                这种能够在<span class="highlight-text">专业逻辑与大众传播之间进行"翻译"</span>的能力，使我能够为企业和组织构建更具温度与影响力的品牌表达。
+                            </p>
+                        </div>
+                    </div>
+                    <div class="gallery-row">
+                        <img src="https://i.postimg.cc/jSNpRV53/12.jpg" alt="表达能力1">
+                        <img src="https://i.postimg.cc/jSNpRV58/13.jpg" alt="表达能力2">
+                        <img src="https://i.postimg.cc/NjT3QhFh/14.png" alt="表达能力3">
+                    </div>
+                </div>
+                
+                <!-- Evaluation 3 -->
+                <div class="card-white p-6 mb-10 fade-in" style="transition-delay: 0.2s;">
+                    <div class="flex items-start gap-4">
+                        <div class="number-badge flex-shrink-0">03</div>
+                        <div>
+                            <h3 class="text-base font-bold text-gray-900 mb-2">严谨而炽热的专业人格：深度观察与极致热爱</h3>
+                            <p class="text-gray-600 leading-relaxed text-sm mb-2">
+                                我始终坚持将<span class="highlight-text">严谨的专业态度</span>与对世界的好奇心结合在一起。在学术研究和工作实践中，我习惯通过深入观察与系统分析理解复杂问题，并以结构化方式输出解决方案。
+                            </p>
+                            <p class="text-gray-600 leading-relaxed text-sm">
+                                对旅行与社会议题的持续关注，也不断为我的工作提供新的灵感与视角，使我能够以更具<span class="highlight-text">人文关怀</span>的方式理解商业与传播，并创造真正具有社会价值的内容。
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Closing -->
+                <div class="text-center card-dark p-10 rounded-2xl fade-in" style="transition-delay: 0.25s;">
+                    <h3 class="text-2xl font-bold text-white mb-3">感谢您的阅读</h3>
+                    <p class="text-gray-300 mb-6 text-sm">期待与您进一步交流，共同探讨可持续发展与品牌传播的无限可能</p>
+                    <div class="flex justify-center gap-3 flex-wrap">
+                        <a href="mailto:xinyue.ma@duke.edu" class="inline-flex items-center gap-2 bg-white text-gray-900 px-6 py-3 rounded-full font-semibold text-sm hover:bg-gray-100 transition-all">
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
+                            </svg>
+                            发送邮件
+                        </a>
+                        <a href="assets/麻欣悦-杜克大学-环境政策硕士27届.pdf" download class="inline-flex items-center gap-2 accent-box text-gray-900 px-6 py-3 rounded-full font-semibold text-sm hover:opacity-90 transition-all">
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/>
+                            </svg>
+                            下载简历
+                        </a>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Footer -->
+            <div class="bg-gray-900 text-white px-8 py-5 mt-12">
+                <div class="max-w-7xl mx-auto flex flex-wrap justify-between items-center text-xs gap-3">
+                    <span class="opacity-70">PORTFOLIO_FILE</span>
+                    <span>© 2026 麻欣悦 All Rights Reserved.</span>
+                    <span class="opacity-70">+86 13282222387</span>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        // Set current date
+        function setCurrentDate() {
+            const now = new Date();
+            const year = now.getFullYear();
+            const month = String(now.getMonth() + 1).padStart(2, '0');
+            const day = String(now.getDate()).padStart(2, '0');
+            const dateStr = `${year}.${month}.${day}`;
+            
+            document.getElementById('currentDate').textContent = dateStr;
+            document.querySelectorAll('.currentDateSpan').forEach(el => {
+                el.textContent = dateStr;
+            });
+        }
+        
+        setCurrentDate();
+        
+        // Smooth scroll animation for fade-in elements
+        const observerOptions = {
+            root: null,
+            rootMargin: '0px',
+            threshold: 0.1
+        };
+        
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, observerOptions);
+        
+        document.querySelectorAll('.fade-in').forEach(el => {
+            observer.observe(el);
+        });
+    </script>
+</body>
+</html>
