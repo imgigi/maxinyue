@@ -292,13 +292,12 @@
         
         /* 杂志风不规则排版 */
         .magazine-collage {
-            display: flex;
-            flex-wrap: wrap;
+            display: grid;
+            grid-template-columns: repeat(6, 1fr);
             gap: 10px;
-            justify-content: center;
-            align-items: flex-start;
+            justify-items: center;
+            align-items: center;
             padding: 20px;
-            min-height: 600px;
         }
         
         .magazine-collage .mag-item {
@@ -322,21 +321,6 @@
             width: 100%;
             object-fit: contain;
         }
-        
-        /* 大图 - 比其他大20% */
-        .magazine-collage .mag-large {
-            width: 220px;
-        }
-        
-        /* 其他图片 - 随机大小 */
-        .magazine-collage .mag-small-1 { width: 140px; }
-        .magazine-collage .mag-small-2 { width: 160px; }
-        .magazine-collage .mag-small-3 { width: 130px; }
-        .magazine-collage .mag-small-4 { width: 150px; }
-        .magazine-collage .mag-small-5 { width: 145px; }
-        .magazine-collage .mag-small-6 { width: 155px; }
-        .magazine-collage .mag-small-7 { width: 135px; }
-        .magazine-collage .mag-small-8 { width: 165px; }
         
         /* 随机旋转角度 */
         .mag-rotate-1 { transform: rotate(-3deg); }
@@ -470,15 +454,9 @@
             .folder-nav {
                 display: none;
             }
-            .magazine-collage .mag-large { width: 160px; }
-            .magazine-collage .mag-small-1,
-            .magazine-collage .mag-small-2,
-            .magazine-collage .mag-small-3,
-            .magazine-collage .mag-small-4,
-            .magazine-collage .mag-small-5,
-            .magazine-collage .mag-small-6,
-            .magazine-collage .mag-small-7,
-            .magazine-collage .mag-small-8 { width: 120px; }
+            .magazine-collage {
+                grid-template-columns: repeat(3, 1fr);
+            }
         }
         
         .divider-line {
@@ -516,9 +494,9 @@
         
         .campus-layout {
             display: grid;
-            grid-template-columns: 1fr 1.5fr;
+            grid-template-columns: 1.2fr 1fr;
             gap: 28px;
-            align-items: start;
+            align-items: center;
         }
         
         .campus-images {
@@ -529,6 +507,7 @@
         
         .campus-images img {
             width: 100%;
+            max-width: 280px;
             height: auto;
             object-fit: contain;
             border-radius: 8px;
@@ -869,7 +848,10 @@
                             <div class="flex flex-wrap gap-2">
                                 <span class="skill-tag">统计与项目评估（A）</span>
                                 <span class="skill-tag">环境经济学（A-）</span>
-                                <span class="skill-tag">ESG投资</span>
+                                <span class="skill-tag">环境政策分析（A-）</span>
+                                <span class="skill-tag">ESG 投资</span>
+                                <span class="skill-tag">环境科学</span>
+                                <span class="skill-tag">自然资源管理</span>
                             </div>
                         </div>
                         
@@ -884,7 +866,20 @@
                             <span class="accent-box px-3 py-1.5 rounded-full text-sm font-medium text-gray-700">2021.09 — 2025.07</span>
                         </div>
                         <p class="text-purple-700 font-semibold text-base mb-4">物联网工程 荣誉学士</p>
-                        
+
+                        <div class="mb-3">
+                            <p class="text-sm text-gray-500 mb-2">核心课程</p>
+                            <div class="flex flex-wrap gap-2 mb-3">
+                                <span class="skill-tag">概率与数理统计</span>
+                                <span class="skill-tag">数据结构与算法</span>
+                                <span class="skill-tag">人工智能</span>
+                                <span class="skill-tag">海量数据存储</span>
+                                <span class="skill-tag">国际贸易实务</span>
+                                <span class="skill-tag">Java 程序设计</span>
+                                <span class="skill-tag">区块链技术与应用</span>
+                            </div>
+                        </div>
+
                         <div class="mb-3">
                             <p class="text-sm text-gray-500 mb-2">荣誉奖项</p>
                             <ul class="text-sm text-gray-600 space-y-1">
@@ -1202,54 +1197,52 @@
                         <p class="text-purple-700 font-medium text-sm">CSR公益项目传播 | 女性成长项目传播 | 全球危机应急服务传播</p>
                     </div>
                     
-                    <!-- 杂志风不规则排版 -->
+                    <!-- 杂志风不规则排版 - 两行布局 -->
                     <div class="magazine-collage">
-                        <!-- 大图1：小小的心愿 -->
-                        <div class="mag-item mag-large mag-rotate-2">
+                        <!-- 第一行 -->
+                        <div class="mag-item mag-rotate-2">
                             <img src="https://i.postimg.cc/25DP6HLS/xie-cheng-gong-yi-xiao-xiao-de-xin-yuan-bang-zhu-huan-bing-er-tong-shi-xian-xin-yuan.png" alt="小小的心愿">
                         </div>
-                        
-                        <!-- 小图：随机大小 -->
-                        <div class="mag-item mag-small-1 mag-rotate-5">
-                            <img src="https://i.postimg.cc/ZqS1Rfvv/xie-cheng-san-ba-fu-nu-jie-zong-zhu-ti-wei-guang-xiang-nuan-zi-you-hui-xiang.jpg" alt="携程三八妇女节总主题">
+
+                        <div class="mag-item mag-rotate-11">
+                            <img src="https://i.postimg.cc/1zQLtWV0/zhong-dong-wei-ji-xie-cheng-ke-fu-zhi-chi-jiu-yuan.png" alt="中东危机携程客服支持救援">
                         </div>
-                        
-                        <div class="mag-item mag-small-2 mag-rotate-8">
+
+                        <div class="mag-item mag-rotate-8">
                             <img src="https://i.postimg.cc/T3mzT81h/2026quan-qiu-sheng-yu-wei-ji-lun-tan.png" alt="2026全球生育危机论坛">
                         </div>
-                        
-                        <!-- 大图2：王丹丹春节返乡故事 -->
-                        <div class="mag-item mag-large mag-rotate-3">
-                            <img src="https://i.postimg.cc/vZ9JGRTT/wang-dan-dan-chun-jie-fan-xiang-gu-shi.png" alt="王丹丹春节返乡故事">
-                        </div>
-                        
-                        <div class="mag-item mag-small-3 mag-rotate-1">
+
+                        <div class="mag-item mag-rotate-1">
                             <img src="https://i.postimg.cc/y89M7qx8/san-ba-fu-nu-jie-yu-ai-zi-de.jpg" alt="三八妇女节予爱自得">
                         </div>
-                        
-                        <div class="mag-item mag-small-4 mag-rotate-7">
+
+                        <div class="mag-item mag-rotate-3">
+                            <img src="https://i.postimg.cc/vZ9JGRTT/wang-dan-dan-chun-jie-fan-xiang-gu-shi.png" alt="王丹丹春节返乡故事">
+                        </div>
+
+                        <div class="mag-item mag-rotate-7">
                             <img src="https://i.postimg.cc/Hk5qTGnx/chun-jie-ke-fu-tuan-dui-fan-xiang-ban-gong.jpg" alt="春节客服团队返乡办公">
                         </div>
-                        
-                        <!-- 大图3：携程旅行木兰计划——青训营 -->
-                        <div class="mag-item mag-large mag-rotate-4">
+
+                        <!-- 第二行 -->
+                        <div class="mag-item mag-rotate-4">
                             <img src="https://i.postimg.cc/wBpSvWR1/xie-cheng-lu-xing-mu-lan-ji-hua-qing-xun-ying.png" alt="携程旅行木兰计划——青训营">
                         </div>
-                        
-                        <div class="mag-item mag-small-5 mag-rotate-9">
+
+                        <div class="mag-item mag-rotate-9">
                             <img src="https://i.postimg.cc/hGBHjCQf/xie-cheng-gong-yi-yuan-wang-cheng-zhen-ji-jin-hui.webp" alt="携程公益愿望成真基金会">
                         </div>
-                        
-                        <div class="mag-item mag-small-6 mag-rotate-6">
+
+                        <div class="mag-item mag-rotate-6">
                             <img src="https://i.postimg.cc/DzTtZC4r/zhong-dong-ju-shi-quan-qiu-jin-ji-zhi-yuan-fu-wu.webp" alt="中东局势全球紧急支援服务">
                         </div>
-                        
-                        <div class="mag-item mag-small-7 mag-rotate-10">
+
+                        <div class="mag-item mag-rotate-10">
                             <img src="https://i.postimg.cc/JhL9nTHZ/yin-zhong-dong-ju-shi-xie-cheng-wei-lu-ke-ti-gong-bao-zhang.jpg" alt="携程为旅客提供保障">
                         </div>
-                        
-                        <div class="mag-item mag-small-8 mag-rotate-11">
-                            <img src="https://i.postimg.cc/1zQLtWV0/zhong-dong-wei-ji-xie-cheng-ke-fu-zhi-chi-jiu-yuan.png" alt="中东危机携程客服支持救援">
+
+                        <div class="mag-item mag-rotate-5" style="grid-column: span 2;">
+                            <img src="https://i.postimg.cc/ZqS1Rfvv/xie-cheng-san-ba-fu-nu-jie-zong-zhu-ti-wei-guang-xiang-nuan-zi-you-hui-xiang.jpg" alt="携程三八妇女节总主题">
                         </div>
                     </div>
                 </div>
